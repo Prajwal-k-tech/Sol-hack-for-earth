@@ -1,8 +1,8 @@
-# Sol-AI Planner: Business Plan Executive Summary
+# sol: Business Plan Executive Summary
 
 ## Company Overview
 
-**Sol-AI Planner** is the world's first prescriptive solar farm operations and maintenance (O&M) platform, combining AI-powered soiling prediction with TSP-optimized drone cleaning routes. We transform solar operations from reactive diagnostics to proactive intelligence.
+**sol** is the world's first prescriptive solar farm operations and maintenance (O&M) platform, combining AI-powered soiling prediction with TSP-optimized drone cleaning routes. We transform solar operations from reactive diagnostics to proactive intelligence.
 
 **Founded**: 2025  
 **Headquarters**: Kottayam, Kerala, India  
@@ -21,7 +21,7 @@ The global solar O&M market faces critical inefficiencies:
 
 ## Solution & Value Proposition
 
-Sol-AI Planner offers the industry's first **prescriptive** approach to solar O&M:
+sol offers the industry's first **prescriptive** approach to solar O&M:
 
 ### Core Features
 1. **Predictive Soiling Forecasting**: AI models predict panel soiling 7 days in advance using weather data
@@ -285,9 +285,9 @@ Sol-AI Planner offers the industry's first **prescriptive** approach to solar O&
 
 ## Conclusion
 
-Sol-AI Planner addresses a massive market opportunity with a unique, technically defensible solution. Our prescriptive approach to solar O&M represents a paradigm shift from reactive to intelligent operations, targeting the underserved small-to-medium installation market.
+sol addresses a massive market opportunity with a unique, technically defensible solution. Our prescriptive approach to solar O&M represents a paradigm shift from reactive to intelligent operations, targeting the underserved small-to-medium installation market.
 
-With proven technology, validated market demand, and a clear path to profitability, Sol-AI Planner is positioned to become the leading platform for intelligent solar operations and maintenance.
+With proven technology, validated market demand, and a clear path to profitability, sol is positioned to become the leading platform for intelligent solar operations and maintenance.
 
 **Investment Opportunity**: Join us in transforming the $13B solar O&M market and accelerating the global transition to clean energy.
 

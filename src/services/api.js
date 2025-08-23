@@ -1,4 +1,4 @@
-// Mock API service for Sol-AI Planner
+// Mock API service for sol
 
 /**
  * Simulate API delay
@@ -48,23 +48,23 @@ export const getSolarFarmData = async () => {
   return {
     farm: {
       id: 'SF-BLR-001',
-      name: 'Bangalore Solar Park',
-      location: { lat: 12.9716, lng: 77.5946 },
-      capacity: '50 MW',
-      totalPanels: 50000,
-      cleanPanels: 35000,
-      moderateSoiling: 10000,
-      needsCleaning: 5000,
-      currentEfficiency: 87,
-      energyGenerated: 245.8, // MWh today
+      name: 'My Solar Panels',
+      location: { lat: 12.9159, lng: 77.6499 },
+      capacity: '10 kW',
+      totalPanels: 40,
+      cleanPanels: 30,
+      moderateSoiling: 5,
+      needsCleaning: 5,
+      currentEfficiency: 92,
+      energyGenerated: 45, // kWh today
       lastUpdated: new Date().toISOString()
     },
     metrics: {
-      dailyGeneration: 245.8,
-      monthlyGeneration: 7234.5,
-      yearlyGeneration: 89456.2,
-      co2Saved: 42.3, // tons
-      treesEquivalent: 1847
+      dailyGeneration: 45,
+      monthlyGeneration: 1350,
+      yearlyGeneration: 16425,
+      co2Saved: 0.03, // tons
+      treesEquivalent: 1
     }
   };
 };

@@ -1,4 +1,4 @@
-# Sol-AI Planner: Demo Script & Presentation Guide
+# sol: Demo Script & Presentation Guide
 
 ## Pre-Presentation Setup Checklist
 
@@ -37,7 +37,7 @@
 **[Visual Cue]**: Display market growth chart
 
 ### Solution Introduction (1.5 minutes)
-**[Presenter 1]**: "Meet Sol-AI Planner - the world's first PRESCRIPTIVE solar O&M platform. We don't just find problems, we solve them intelligently.
+**[Presenter 1]**: "Meet sol - the world's first PRESCRIPTIVE solar O&M platform. We don't just find problems, we solve them intelligently.
 
 Our platform has three core innovations:
 1. **Predictive Soiling Forecasting** - Using weather data and LSTM neural networks, we predict when panels will get dirty BEFORE it happens
@@ -115,7 +115,7 @@ We've already validated demand with three solar operators and have letters of in
 **[Presenter 2]**: "We're seeking partnerships with drone manufacturers, pilot customers for our beta program, and investor connections for our upcoming seed round. Our goal is to make solar operations intelligent, one farm at a time."
 
 ### Closing & Call to Action (30 seconds)
-**[Both Presenters]**: "Sol-AI Planner represents the future of solar O&M - predictive, prescriptive, and profitable. We don't just find dirty panels, we solve the cleaning problem efficiently.
+**[Both Presenters]**: "sol represents the future of solar O&M - predictive, prescriptive, and profitable. We don't just find dirty panels, we solve the cleaning problem efficiently.
 
 Thank you. Questions?"
 

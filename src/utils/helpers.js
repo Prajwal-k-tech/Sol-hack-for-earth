@@ -1,4 +1,4 @@
-// Utility functions for Sol-AI Planner
+// Utility functions for sol
 
 /**
  * Generate realistic solar panel coordinates around Bangalore
@@ -7,7 +7,7 @@
  * @param {number} radius - Radius in km to spread panels
  * @returns {Array} Array of panel objects
  */
-export const generateSolarPanels = (count = 300, center = { lat: 12.9716, lng: 77.5946 }, radius = 5) => {
+export const generateSolarPanels = (count = 40, center = { lat: 12.9159, lng: 77.6499 }, radius = 0.01) => {
   const panels = [];
   
   // Define status distribution: 70% clean, 20% moderate, 10% dirty
@@ -94,59 +94,7 @@ const getRandomLastCleanedDate = () => {
   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 };
 
-/**
- * Simple TSP solver using nearest neighbor heuristic
- * @param {Array} panels - Array of panel coordinates
- * @param {Object} startPoint - Starting point {lat, lng}
- * @returns {Object} Optimized route with distance and time metrics
- */
-export const solveTSP = (panels, startPoint = { lat: 12.9716, lng: 77.5946 }) => {
-  if (panels.length === 0) return { route: [], totalDistance: 0, estimatedTime: 0 };
-  
-  // Filter only dirty panels that need cleaning
-  const dirtyPanels = panels.filter(panel => panel.status === 'dirty');
-  
-  if (dirtyPanels.length === 0) return { route: [], totalDistance: 0, estimatedTime: 0 };
-  
-  const unvisited = [...dirtyPanels];
-  const route = [startPoint];
-  let currentPoint = startPoint;
-  let totalDistance = 0;
-  
-  while (unvisited.length > 0) {
-    let nearestIndex = 0;
-    let minDistance = calculateDistance(currentPoint, unvisited[0]);
-    
-    // Find nearest unvisited panel
-    for (let i = 1; i < unvisited.length; i++) {
-      const distance = calculateDistance(currentPoint, unvisited[i]);
-      if (distance < minDistance) {
-        minDistance = distance;
-        nearestIndex = i;
-      }
-    }
-    
-    const nearestPanel = unvisited[nearestIndex];
-    route.push(nearestPanel);
-    totalDistance += minDistance;
-    currentPoint = nearestPanel;
-    unvisited.splice(nearestIndex, 1);
-  }
-  
-  // Return to start
-  totalDistance += calculateDistance(currentPoint, startPoint);
-  route.push(startPoint);
-  
-  // Calculate estimated time (assuming drone speed of 15 m/s)
-  const estimatedTime = Math.round((totalDistance * 1000) / 15 / 60); // minutes
-  
-  return {
-    route,
-    totalDistance: Math.round(totalDistance * 1000) / 1000, // km
-    estimatedTime,
-    panelsToClean: dirtyPanels.length
-  };
-};
+
 
 /**
  * Calculate distance between two points using Haversine formula

@@ -1,8 +1,8 @@
-# Sol-AI Planner - Intelligent Solar Farm Management Platform
+# sol - Intelligent Solar Farm Management Platform
 
 ## 🌟 Project Overview
 
-Sol-AI Planner is a comprehensive AI-powered SaaS platform for solar farm operations and maintenance that combines soiling prediction with TSP-optimized drone cleaning routes. This project was developed for the **Hack for Earth 2025** hackathon at IIIT Kottayam, targeting the "Clean Energy & Solar Innovation" and "Climate Resilience through AI & IoT" themes.
+sol is a comprehensive AI-powered SaaS platform for solar farm operations and maintenance that combines soiling prediction with TSP-optimized drone cleaning routes. This project was developed for the **Hack for Earth 2025** hackathon at IIIT Kottayam, targeting the "Clean Energy & Solar Innovation" and "Climate Resilience through AI & IoT" themes.
 
 ## 🎯 Core Value Proposition
 

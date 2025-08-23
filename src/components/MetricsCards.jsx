@@ -80,23 +80,23 @@ const MetricsCards = ({ metrics, farmData }) => {
             <div>
               <p className="text-gray-600">Energy Generated</p>
               <p className="font-semibold text-gray-900">
-                {farmData.metrics?.dailyGeneration || '245.8'} MWh
+                {farmData.metrics?.dailyGeneration || '45'} kWh
               </p>
             </div>
             <div>
               <p className="text-gray-600">CO₂ Saved</p>
               <p className="font-semibold text-green-600">
-                {farmData.metrics?.co2Saved || '42.3'} tons
+                {farmData.metrics?.co2Saved || '0.03'} tons
               </p>
             </div>
             <div>
               <p className="text-gray-600">Revenue</p>
-              <p className="font-semibold text-sky-600">₹18,42,000</p>
+              <p className="font-semibold text-sky-600">₹315</p>
             </div>
             <div>
               <p className="text-gray-600">Trees Equivalent</p>
               <p className="font-semibold text-solar-600">
-                {formatNumber(farmData.metrics?.treesEquivalent || 1847)}
+                {formatNumber(farmData.metrics?.treesEquivalent || 1)}
               </p>
             </div>
           </div>

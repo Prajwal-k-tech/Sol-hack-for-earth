@@ -15,7 +15,7 @@ L.Icon.Default.mergeOptions({
 const PanelMarker = ({ panel, onPanelSelect, isSelected }) => {
   const getMarkerIcon = (status, selected = false) => {
     const color = getStatusColor(status);
-    const size = selected ? 12 : 8;
+    const size = selected ? 18 : 14;
     const opacity = selected ? 1 : 0.8;
     
     return L.divIcon({
@@ -87,6 +87,40 @@ const PanelMarker = ({ panel, onPanelSelect, isSelected }) => {
   );
 };
 
+// Drone marker component
+const DroneMarker = ({ position }) => {
+  const droneIcon = L.divIcon({
+    className: 'custom-drone-marker',
+    html: `<div style="font-size: 24px;">🛸</div>`,
+    iconSize: [32, 32],
+    iconAnchor: [16, 16],
+  });
+
+  return (
+    <Marker position={position} icon={droneIcon}>
+      <Popup>
+        <div className="text-sm">
+          <h3 className="font-semibold text-gray-900 mb-2">Drone Unit</h3>
+          <div className="space-y-1">
+            <div className="flex justify-between">
+              <span className="text-gray-600">Status:</span>
+              <span className="font-medium text-green-600">Flying</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Battery:</span>
+              <span className="font-medium text-gray-900">75%</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-gray-600">Brand:</span>
+              <span className="font-medium text-gray-900">Aeroclean Systems</span>
+            </div>
+          </div>
+        </div>
+      </Popup>
+    </Marker>
+  );
+};
+
 // Component to handle route animation
 const RoutePolyline = ({ route }) => {
   const map = useMap();
@@ -133,30 +167,23 @@ const MapEventHandler = ({ onMapReady }) => {
 const SolarMap = ({ 
   panels = [], 
   farmData, 
-  optimizedRoute, 
   onPanelSelect, 
   selectedPanel 
 }) => {
   const mapRef = useRef();
   
-  // Default center on Bangalore
-  const center = farmData?.farm?.location || { lat: 12.9716, lng: 77.5946 };
+  // Default center on the new rooftop location
+  const center = { lat: 12.9159, lng: 77.6499 };
   
   const handleMapReady = (map) => {
     mapRef.current = map;
-    
-    // Fit map to show all panels if available
-    if (panels.length > 0) {
-      const bounds = L.latLngBounds(panels.map(p => [p.lat, p.lng]));
-      map.fitBounds(bounds, { padding: [50, 50] });
-    }
   };
 
   return (
     <div className="h-full w-full relative">
       <MapContainer
         center={[center.lat, center.lng]}
-        zoom={14}
+        zoom={19}
         style={{ height: '100%', width: '100%' }}
         zoomControl={true}
         attributionControl={false}
@@ -176,11 +203,9 @@ const SolarMap = ({
             isSelected={selectedPanel?.id === panel.id}
           />
         ))}
-        
-        {/* Optimized route */}
-        {optimizedRoute && (
-          <RoutePolyline route={optimizedRoute.route} />
-        )}
+
+        {/* Drone Marker */}
+        <DroneMarker position={[center.lat, center.lng]} />
         
         {/* Map event handler */}
         <MapEventHandler onMapReady={handleMapReady} />
@@ -212,31 +237,6 @@ const SolarMap = ({
             <div className="flex justify-between">
               <span className="text-gray-600">Efficiency:</span>
               <span className="font-medium text-green-600">{farmData.farm.currentEfficiency}%</span>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Route info overlay */}
-      {optimizedRoute && (
-        <div className="absolute bottom-4 right-4 bg-white rounded-lg shadow-lg p-4 z-[1000]">
-          <h4 className="font-semibold text-gray-900 mb-2">Optimized Route</h4>
-          <div className="text-sm space-y-1">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Distance:</span>
-              <span className="font-medium">{optimizedRoute.optimization?.optimizedRoute?.distance || 8.1} km</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Time:</span>
-              <span className="font-medium">{optimizedRoute.optimization?.optimizedRoute?.time || 87} min</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Panels:</span>
-              <span className="font-medium">{optimizedRoute.route?.waypoints?.length || 0}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Battery:</span>
-              <span className="font-medium text-green-600">{optimizedRoute.optimization?.optimizedRoute?.batteryUsage || 41}%</span>
             </div>
           </div>
         </div>

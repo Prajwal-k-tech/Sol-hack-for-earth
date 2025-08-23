@@ -13,7 +13,6 @@ function App() {
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedPanel, setSelectedPanel] = useState(null);
-  const [optimizedRoute, setOptimizedRoute] = useState(null);
   const [isOptimizing, setIsOptimizing] = useState(false);
 
   // Initialize application data
@@ -23,7 +22,7 @@ function App() {
         setLoading(true);
         
         // Generate panels and forecast data immediately
-        const generatedPanels = generateSolarPanels(300);
+        const generatedPanels = generateSolarPanels(40);
         const forecast = generateSoilingForecast();
         
         setPanels(generatedPanels);
@@ -74,22 +73,14 @@ function App() {
     setSelectedPanel(panel);
   };
 
-  // Handle route optimization
-  const handleRouteOptimization = (route) => {
-    setOptimizedRoute(route);
-  };
-
-  // Handle optimization loading state
-  const handleOptimizationLoading = (loading) => {
-    setIsOptimizing(loading);
-  };
+  
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-sky-50 to-solar-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-sky-600 mx-auto mb-4"></div>
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">Initializing Sol-AI Planner</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mb-2">Initializing sol</h2>
           <p className="text-gray-500">Loading solar farm data and AI models...</p>
         </div>
       </div>
@@ -117,10 +108,6 @@ function App() {
             metrics={metrics}
             panels={panels}
             selectedPanel={selectedPanel}
-            optimizedRoute={optimizedRoute}
-            isOptimizing={isOptimizing}
-            onRouteOptimization={handleRouteOptimization}
-            onOptimizationLoading={handleOptimizationLoading}
           />
         </div>
         
@@ -129,7 +116,6 @@ function App() {
           <SolarMap
             panels={panels}
             farmData={farmData}
-            optimizedRoute={optimizedRoute}
             onPanelSelect={handlePanelSelect}
             selectedPanel={selectedPanel}
           />
@@ -149,12 +135,7 @@ function App() {
                 <div className="w-3 h-3 bg-red-500 rounded-sm"></div>
                 <span>Needs Cleaning ({metrics?.needsCleaning || 0})</span>
               </div>
-              {optimizedRoute && (
-                <div className="flex items-center gap-2 mt-3 pt-2 border-t">
-                  <div className="w-3 h-1 bg-blue-500 rounded-full"></div>
-                  <span className="text-blue-600 font-medium">Optimized Route</span>
-                </div>
-              )}
+              
             </div>
           </div>
           
@@ -185,7 +166,7 @@ function App() {
       <footer className="bg-white border-t border-gray-200 py-4 px-6">
         <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600">
           <div className="flex items-center gap-4">
-            <span>© 2025 Sol-AI Planner</span>
+            <span>© 2025 sol</span>
             <span>•</span>
             <span>Hack for Earth 2025 - IIIT Kottayam</span>
           </div>

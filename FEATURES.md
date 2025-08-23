@@ -1,15 +1,15 @@
-# Sol-AI Planner - Complete Features Documentation
+# sol - Complete Features Documentation
 
 ## 🌟 Application Overview
 
-Sol-AI Planner is a production-ready React application that demonstrates advanced solar farm management capabilities through AI-powered soiling prediction and TSP-optimized drone cleaning routes.
+sol is a production-ready React application that demonstrates advanced solar farm management capabilities through AI-powered soiling prediction and TSP-optimized drone cleaning routes.
 
 ---
 
 ## 🎛️ **Core Features Implemented**
 
 ### 1. **Professional Navbar & Navigation**
-- **Logo**: Gradient solar panel icon with "Sol-AI Planner" branding
+- **Logo**: Gradient solar panel icon with "sol" branding
 - **Navigation**: Dashboard, Farms, Analytics, Settings (responsive design)
 - **Notifications**: Real-time alerts with unread count badge
 - **Profile**: User dropdown with settings and logout options

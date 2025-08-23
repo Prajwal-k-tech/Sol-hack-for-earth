@@ -71,7 +71,7 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div className="ml-3 hidden sm:block">
-                <h1 className="text-xl font-bold text-gray-900">Sol-AI Planner</h1>
+                <h1 className="text-xl font-bold text-gray-900">sol</h1>
                 <p className="text-xs text-gray-500">Intelligent Solar Operations</p>
               </div>
             </div>

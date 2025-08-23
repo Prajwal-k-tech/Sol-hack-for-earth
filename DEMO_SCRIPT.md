@@ -1,8 +1,8 @@
-# Sol-AI Planner - Hackathon Demo Script
+# sol - Hackathon Demo Script
 
 ## 🎯 Demo Overview (5-7 minutes)
 
-**Opening Hook**: "What if I told you we could reduce solar farm maintenance costs by 47% while increasing efficiency to 87%? Welcome to Sol-AI Planner - the first prescriptive solar O&M platform."
+**Opening Hook**: "What if I told you we could reduce solar farm maintenance costs by 47% while increasing efficiency to 87%? Welcome to sol - the first prescriptive solar O&M platform."
 
 ---
 
@@ -16,7 +16,7 @@
 - **Key Point**: 5,000 panels need cleaning = massive opportunity cost
 
 ### 2. **Our Solution - AI Prediction** (60 seconds)
-> "Sol-AI Planner doesn't just detect problems - it predicts them. Our AI model achieves 92.5% accuracy in soiling prediction."
+> "sol doesn't just detect problems - it predicts them. Our AI model achieves 92.5% accuracy in soiling prediction."
 
 **Demo Steps**:
 1. Point to "AI Soiling Prediction" chart
@@ -91,7 +91,7 @@
 ---
 
 ## 🎯 Closing Statement (30 seconds)
-> "Sol-AI Planner isn't just about finding dirty panels - we're solving the entire cleaning problem intelligently. In a world where every kilowatt-hour matters for our planet's future, we're making sure solar farms operate at peak efficiency. Thank you."
+> "sol isn't just about finding dirty panels - we're solving the entire cleaning problem intelligently. In a world where every kilowatt-hour matters for our planet's future, we're making sure solar farms operate at peak efficiency. Thank you."
 
 ---
 

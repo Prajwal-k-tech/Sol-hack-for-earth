@@ -1,4 +1,4 @@
-name: Deploy Sol-AI Planner to GitHub Pages
+name: Deploy sol to GitHub Pages
 
 on:
   push:

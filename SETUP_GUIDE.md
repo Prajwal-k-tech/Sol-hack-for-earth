@@ -1,4 +1,4 @@
-# Sol-AI Planner - Quick Setup Guide for Judges/Evaluators
+# sol - Quick Setup Guide for Judges/Evaluators
 
 ## 🚀 **Instant Access** (Recommended)
 
@@ -131,7 +131,7 @@ npm run preview
 ## 🎭 **Demo Script for Judges**
 
 ### Opening (30 seconds)
-> "Traditional solar farms lose 15-25% efficiency due to poor maintenance scheduling. Sol-AI Planner solves this with the first prescriptive solar O&M platform."
+> "Traditional solar farms lose 15-25% efficiency due to poor maintenance scheduling. sol solves this with the first prescriptive solar O&M platform."
 
 ### Problem Demo (30 seconds)
 > "See these red markers? Those are dirty panels costing thousands in lost revenue. Notice the dust storm alert - tomorrow will make it worse."

@@ -1,9 +1,9 @@
-# Sol-AI Planner
+# sol
 ## Intelligent Solar Farm Operations & Maintenance Platform
 
 **Hack for Earth 2025**  
 Club Enigma, IIIT Kottayam  
-Team: Sol-AI Planner
+Team: sol
 
 ---
 
@@ -36,7 +36,7 @@ Team: Sol-AI Planner
 
 ---
 
-## Slide 3: Our Solution - Sol-AI Planner
+## Slide 3: Our Solution - sol
 ### The First Prescriptive Solar O&M Platform
 
 **What Makes Us Different:**
@@ -95,7 +95,7 @@ Team: Sol-AI Planner
 
 **Key Differentiators:**
 
-| Feature | Sol-AI Planner | SenseHawk | Sky-Futures |
+| Feature | sol | SenseHawk | Sky-Futures |
 |---------|----------------|-----------|-------------|
 | Soiling Detection | ✅ | ✅ | ✅ |
 | Path Optimization | ✅ | ❌ | ❌ |
@@ -223,7 +223,7 @@ Team: Sol-AI Planner
 ### Questions & Discussion
 
 **Key Takeaways:**
-1. Sol-AI Planner is the **first prescriptive** solar O&M platform
+1. sol is the **first prescriptive** solar O&M platform
 2. **Massive market opportunity** in underserved small-to-medium installations
 3. **Proven technical approach** with validated AI/ML models
 4. **Clear path to profitability** with SaaS business model
@@ -231,4 +231,4 @@ Team: Sol-AI Planner
 
 **"We don't just find dirty panels - we solve the cleaning problem efficiently."**
 
-*Sol-AI Planner: Making Solar Operations Intelligent*
+*sol: Making Solar Operations Intelligent*

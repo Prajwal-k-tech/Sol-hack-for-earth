@@ -1,4 +1,4 @@
-// Sol AI Planner - Core functionality for sustainable Earth solutions
+// sol - Core functionality for sustainable Earth solutions
 class SolAIPlanner {
     constructor() {
         this.init();
@@ -29,7 +29,7 @@ class SolAIPlanner {
     showWelcomeMessage() {
         this.planOutput.innerHTML = `
             <div class="placeholder">
-                <p>🌍 Welcome to Sol AI Planner!</p>
+                <p>🌍 Welcome to sol!</p>
                 <p>Enter your sustainability goal above and click "Generate Plan" to get AI-powered recommendations for your environmental project.</p>
                 <p><small>Tip: Press Ctrl+Enter to quickly generate a plan</small></p>
             </div>

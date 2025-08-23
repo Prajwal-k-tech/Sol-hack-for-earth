@@ -48,7 +48,7 @@ let tooltip = null;
 
 // Initialize the dashboard
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Initializing Sol-AI Planner Dashboard...');
+    console.log('Initializing sol Dashboard...');
     initializeSolarGrid();
     initializeSoilingChart();
     createTooltip();
@@ -725,4 +725,4 @@ window.toggleStatusOverlay = toggleStatusOverlay;
 window.zoomIn = zoomIn;
 window.zoomOut = zoomOut;
 
-console.log('Sol-AI Planner Dashboard JavaScript loaded successfully');
+console.log('sol Dashboard JavaScript loaded successfully');

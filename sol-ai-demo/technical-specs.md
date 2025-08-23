@@ -1,7 +1,7 @@
-# Sol-AI Planner: Technical Specification Document
+# sol: Technical Specification Document
 
 ## Executive Summary
-Sol-AI Planner is an intelligent SaaS platform that combines AI-powered soiling prediction with TSP-optimized drone cleaning routes for solar farm operations and maintenance.
+sol is an intelligent SaaS platform that combines AI-powered soiling prediction with TSP-optimized drone cleaning routes for solar farm operations and maintenance.
 
 ## System Architecture
 
@@ -285,4 +285,4 @@ services:
 
 ---
 
-*This technical specification serves as the foundation for Sol-AI Planner development and implementation.*
+*This technical specification serves as the foundation for sol development and implementation.*
