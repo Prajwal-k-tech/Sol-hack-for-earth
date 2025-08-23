@@ -1,0 +1,16 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sun -->
+  <circle cx="32" cy="32" r="10" fill="#f9e2af"/>
+  <path d="M32 16V12" stroke="#f9e2af" stroke-width="3" stroke-linecap="round"/>
+  <path d="M32 52V48" stroke="#f9e2af" stroke-width="3" stroke-linecap="round"/>
+  <path d="M48 32H52" stroke="#f9e2af" stroke-width="3" stroke-linecap="round"/>
+  <path d="M12 32H16" stroke="#f9e2af" stroke-width="3" stroke-linecap="round"/>
+  <path d="M45.25 18.75L48.08 15.92" stroke="#f9e2af" stroke-width="3" stroke-linecap="round"/>
+  <path d="M15.92 48.08L18.75 45.25" stroke="#f9e2af" stroke-width="3" stroke-linecap="round"/>
+  <path d="M45.25 45.25L48.08 48.08" stroke="#f9e2af" stroke-width="3" stroke-linecap="round"/>
+  <path d="M15.92 15.92L18.75 18.75" stroke="#f9e2af" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Sparkles -->
+  <path d="M54 12L52 16L48 18L52 20L54 24L56 20L60 18L56 16L54 12Z" fill="#cba6f7"/>
+  <path d="M14 8L12.5 11L10 11.5L12.5 12L14 15L15.5 12L18 11.5L15.5 11L14 8Z" fill="#cba6f7" opacity="0.7"/>
+</svg>
