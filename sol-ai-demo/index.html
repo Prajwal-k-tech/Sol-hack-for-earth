@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sol-AI Planner - Solar Farm Management Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://kit.fontawesome.com/YOUR_KIT_ID.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/b173bb7a-d430-40a2-97c6-090f0c4dc9ce.png" alt="Sol-AI Planner" class="brand-logo">
+                <h1>Sol-AI Planner</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="#" class="nav-link active">Dashboard</a>
+                <a href="#" class="nav-link">Farms</a>
+                <a href="#" class="nav-link">Analytics</a>
+                <a href="#" class="nav-link">Settings</a>
+            </div>
+            <div class="nav-actions">
+                <div class="notification-bell">
+                    <span class="bell-icon">🔔</span>
+                    <span class="notification-badge">3</span>
+                </div>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/32x32/1FB8CD/ffffff?text=A" alt="User" class="avatar">
+                    <span class="user-name">Admin</span>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Alert Banner -->
+    <div class="alert-banner" id="alertBanner">
+        <span class="alert-icon">⚠️</span>
+        <span class="alert-text">Weather Alert: Dust storm expected tomorrow - PM2.5 levels may increase</span>
+        <button class="alert-close" onclick="closeAlert()">&times;</button>
+    </div>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard">
+        <!-- Left Panel -->
+        <aside class="sidebar">
+            <div class="farm-selector">
+                <label class="form-label">Select Farm</label>
+                <select class="form-control" id="farmSelector">
+                    <option value="bangalore">Bangalore Solar Park</option>
+                    <option value="chennai">Chennai Solar Farm</option>
+                    <option value="hyderabad">Hyderabad Energy Center</option>
+                </select>
+            </div>
+
+            <!-- Weather Widget -->
+            <div class="card weather-widget">
+                <div class="card__header">
+                    <h3>Current Weather</h3>
+                    <span class="weather-condition">☁️ Partly Cloudy</span>
+                </div>
+                <div class="card__body">
+                    <div class="weather-stats">
+                        <div class="weather-stat">
+                            <span class="weather-label">Temperature</span>
+                            <span class="weather-value">32°C</span>
+                        </div>
+                        <div class="weather-stat">
+                            <span class="weather-label">Humidity</span>
+                            <span class="weather-value">45%</span>
+                        </div>
+                        <div class="weather-stat">
+                            <span class="weather-label">Wind Speed</span>
+                            <span class="weather-value">12 km/h</span>
+                        </div>
+                        <div class="weather-stat">
+                            <span class="weather-label">PM2.5</span>
+                            <span class="weather-value pm25-high">68 μg/m³</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <h4>Total Panels</h4>
+                    <span class="metric-value">50,000</span>
+                </div>
+                <div class="metric-card clean">
+                    <h4>Clean Panels</h4>
+                    <span class="metric-value">35,000</span>
+                </div>
+                <div class="metric-card moderate">
+                    <h4>Moderate Soiling</h4>
+                    <span class="metric-value">10,000</span>
+                </div>
+                <div class="metric-card dirty">
+                    <h4>Needs Cleaning</h4>
+                    <span class="metric-value">5,000</span>
+                </div>
+                <div class="metric-card efficiency">
+                    <h4>Efficiency</h4>
+                    <span class="metric-value">87%</span>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <button class="btn btn--primary btn--full-width" onclick="runPrediction()">
+                    🔮 Run Prediction
+                </button>
+                <button class="btn btn--primary btn--full-width" id="optimizeBtn" onclick="optimizeRoutes()">
+                    🛤️ Optimize Routes
+                </button>
+                <button class="btn btn--outline btn--full-width" onclick="generateReport()">
+                    📊 Generate Report
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Solar Farm Map -->
+            <div class="map-section">
+                <div class="map-header">
+                    <h2>Solar Farm Overview</h2>
+                    <div class="map-controls">
+                        <div class="overlay-toggles">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="weatherOverlay" onchange="toggleWeatherOverlay()">
+                                Weather
+                            </label>
+                            <label class="toggle-label">
+                                <input type="checkbox" id="routeOverlay" onchange="toggleRouteOverlay()">
+                                Drone Routes
+                            </label>
+                            <label class="toggle-label">
+                                <input type="checkbox" id="statusOverlay" checked onchange="toggleStatusOverlay()">
+                                Panel Status
+                            </label>
+                        </div>
+                        <div class="zoom-controls">
+                            <button class="zoom-btn" onclick="zoomIn()">+</button>
+                            <button class="zoom-btn" onclick="zoomOut()">-</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="map-container" id="mapContainer">
+                    <div class="solar-farm-grid" id="solarGrid">
+                        <!-- Solar panels will be generated by JavaScript -->
+                    </div>
+                    
+                    <!-- Drone Path Overlay -->
+                    <svg class="drone-path" id="dronePath">
+                        <path id="optimizedPath" class="route-path" d="" fill="none" stroke="#1FB8CD" stroke-width="3" stroke-dasharray="5,5">
+                            <animate attributeName="stroke-dashoffset" values="0;-20" dur="2s" repeatCount="indefinite"/>
+                        </path>
+                        <circle class="drone" id="drone" r="8" fill="#FFC185" stroke="#1FB8CD" stroke-width="2" style="opacity: 0;">
+                            <animateMotion dur="10s" repeatCount="indefinite" rotate="auto" begin="0s">
+                                <mpath href="#optimizedPath"/>
+                            </animateMotion>
+                        </circle>
+                    </svg>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-item">
+                        <span class="legend-color clean"></span>
+                        <span>Clean (70%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color moderate"></span>
+                        <span>Moderate Soiling (20%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color dirty"></span>
+                        <span>Needs Cleaning (10%)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="bottom-section">
+                <!-- Soiling Prediction Chart -->
+                <div class="card chart-card">
+                    <div class="card__header">
+                        <h3>7-Day Soiling Forecast</h3>
+                        <button class="btn btn--sm btn--outline" onclick="showWeatherForecast()">View Forecast</button>
+                    </div>
+                    <div class="card__body">
+                        <div class="chart-container" style="position: relative; height: 200px;">
+                            <canvas id="soilingChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activities -->
+                <div class="card activities-card">
+                    <div class="card__header">
+                        <h3>Recent Activities</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="activity-feed" id="activityFeed">
+                            <div class="activity-item">
+                                <span class="activity-time">2 min ago</span>
+                                <span class="activity-text">Route optimization completed for Zone A</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-time">15 min ago</span>
+                                <span class="activity-text">Weather alert issued for tomorrow</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-time">1 hour ago</span>
+                                <span class="activity-text">Cleaning crew dispatched to Zone B</span>
+                            </div>
+                            <div class="activity-item">
+                                <span class="activity-time">3 hours ago</span>
+                                <span class="activity-text">Efficiency report generated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ROI Calculator -->
+                <div class="card roi-card">
+                    <div class="card__header">
+                        <h3>ROI Calculator</h3>
+                    </div>
+                    <div class="card__body">
+                        <div class="roi-metrics">
+                            <div class="roi-metric">
+                                <span class="roi-label">Monthly Cost</span>
+                                <span class="roi-value">₹299</span>
+                            </div>
+                            <div class="roi-metric">
+                                <span class="roi-label">Annual Savings</span>
+                                <span class="roi-value success">₹45,000</span>
+                            </div>
+                            <div class="roi-metric">
+                                <span class="roi-label">Payback Period</span>
+                                <span class="roi-value">14 months</span>
+                            </div>
+                            <div class="roi-metric">
+                                <span class="roi-label">Efficiency Gain</span>
+                                <span class="roi-value success">25-35%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Panel Details Modal -->
+    <div class="modal hidden" id="panelModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Panel Details</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="panel-info">
+                    <p><strong>Panel ID:</strong> <span id="panelId"></span></p>
+                    <p><strong>Status:</strong> <span id="panelStatus"></span></p>
+                    <p><strong>Last Cleaned:</strong> <span id="lastCleaned"></span></p>
+                    <p><strong>Soiling Level:</strong> <span id="soilingLevel"></span></p>
+                    <p><strong>Energy Output:</strong> <span id="energyOutput"></span></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--outline" onclick="closeModal()">Close</button>
+                <button class="btn btn--primary" onclick="scheduleCleaningForPanel()">Schedule Cleaning</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optimization Results Modal -->
+    <div class="modal hidden" id="optimizationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Route Optimization Results</h3>
+                <button class="modal-close" onclick="closeOptimizationModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="optimization-results">
+                    <div class="result-metric">
+                        <span class="result-label">Time Reduction:</span>
+                        <span class="result-value success">47%</span>
+                    </div>
+                    <div class="result-metric">
+                        <span class="result-label">Battery Savings:</span>
+                        <span class="result-value success">52%</span>
+                    </div>
+                    <div class="result-metric">
+                        <span class="result-label">Panels to Clean:</span>
+                        <span class="result-value">150 panels</span>
+                    </div>
+                    <div class="result-metric">
+                        <span class="result-label">Estimated Time:</span>
+                        <span class="result-value">87 minutes</span>
+                    </div>
+                    <div class="result-metric">
+                        <span class="result-label">Previous Time:</span>
+                        <span class="result-value">164 minutes</span>
+                    </div>
+                </div>
+                <img src="https://user-gen-media-assets.s3.amazonaws.com/gpt4o_images/7c074c17-7534-427e-9086-e0572951bd22.png" alt="TSP Optimization" class="optimization-chart">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--outline" onclick="closeOptimizationModal()">Close</button>
+                <button class="btn btn--primary" onclick="deployOptimizedRoute()">Deploy Route</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

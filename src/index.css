@@ -1,0 +1,120 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Leaflet map styles */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 12px 16px;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Custom panel marker styles */
+.panel-marker {
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.panel-marker.clean {
+  background-color: #22c55e;
+}
+
+.panel-marker.moderate {
+  background-color: #f59e0b;
+}
+
+.panel-marker.dirty {
+  background-color: #ef4444;
+}
+
+/* Animated route styles */
+.drone-route {
+  stroke-dasharray: 10, 5;
+  animation: routeAnimate 3s linear infinite;
+}
+
+@keyframes routeAnimate {
+  0% {
+    stroke-dashoffset: 15;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Loading animation */
+.loading-dots::after {
+  content: '';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% {
+    color: rgba(0, 0, 0, 0);
+    text-shadow:
+      .25em 0 0 rgba(0, 0, 0, 0),
+      .5em 0 0 rgba(0, 0, 0, 0);
+  }
+  40% {
+    color: #3b82f6;
+    text-shadow:
+      .25em 0 0 rgba(0, 0, 0, 0),
+      .5em 0 0 rgba(0, 0, 0, 0);
+  }
+  60% {
+    text-shadow:
+      .25em 0 0 #3b82f6,
+      .5em 0 0 rgba(0, 0, 0, 0);
+  }
+  80%, 100% {
+    text-shadow:
+      .25em 0 0 #3b82f6,
+      .5em 0 0 #3b82f6;
+  }
+}
+
+/* Pulse animation for notifications */
+.notification-pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .leaflet-control-container {
+    font-size: 14px;
+  }
+  
+  .leaflet-popup-content {
+    margin: 8px 12px;
+    font-size: 14px;
+  }
+}
