@@ -77,18 +77,18 @@ function App() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-sky-50 to-solar-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-sky-50 to-solar-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-sky-600 mx-auto mb-4"></div>
-          <h2 className="text-xl font-semibold text-gray-700 mb-2">Initializing sol</h2>
-          <p className="text-gray-500">Loading solar farm data and AI models...</p>
+          <h2 className="text-xl font-semibold text-gray-700 mb-2 dark:text-white">Initializing sol</h2>
+          <p className="text-gray-500 dark:text-gray-400">Loading solar farm data and AI models...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 to-solar-50">
+    <div className="min-h-screen bg-gradient-to-br from-sky-50 to-solar-50 dark:from-gray-900 dark:to-gray-800">
       <Navbar 
         notifications={notifications}
         onNotificationRead={(id) => {
@@ -100,7 +100,7 @@ function App() {
       
       <div className="flex flex-col lg:flex-row h-[calc(100vh-4rem)]">
         {/* Left Sidebar - Dashboard */}
-        <div className="w-full lg:w-96 bg-white shadow-lg overflow-y-auto">
+        <div className="w-full lg:w-96 bg-white shadow-lg overflow-y-auto dark:bg-gray-800">
           <Dashboard
             farmData={farmData}
             weatherData={weatherData}
@@ -121,40 +121,40 @@ function App() {
           />
           
           {/* Map Controls Overlay */}
-          <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-4 z-[1000]">
+          <div className="absolute top-4 right-4 bg-white rounded-lg shadow-lg p-4 z-[1000] dark:bg-gray-800/90 dark:border dark:border-gray-700">
             <div className="space-y-2 text-sm">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-green-500 rounded-sm"></div>
-                <span>Clean ({metrics?.cleanPanels || 0})</span>
+                <span className="dark:text-gray-300">Clean ({metrics?.cleanPanels || 0})</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-yellow-500 rounded-sm"></div>
-                <span>Moderate ({metrics?.moderateSoiling || 0})</span>
+                <span className="dark:text-gray-300">Moderate ({metrics?.moderateSoiling || 0})</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 bg-red-500 rounded-sm"></div>
-                <span>Needs Cleaning ({metrics?.needsCleaning || 0})</span>
+                <span className="dark:text-gray-300">Needs Cleaning ({metrics?.needsCleaning || 0})</span>
               </div>
               
             </div>
           </div>
           
           {/* Performance Metrics Overlay */}
-          <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-4 z-[1000]">
+          <div className="absolute bottom-4 left-4 bg-white rounded-lg shadow-lg p-4 z-[1000] dark:bg-gray-800/90 dark:border dark:border-gray-700">
             <div className="text-sm">
-              <h3 className="font-semibold text-gray-700 mb-2">Real-time Performance</h3>
+              <h3 className="font-semibold text-gray-700 mb-2 dark:text-white">Real-time Performance</h3>
               <div className="space-y-1">
                 <div className="flex justify-between">
-                  <span>Efficiency:</span>
-                  <span className="font-medium text-green-600">{metrics?.currentEfficiency || 0}%</span>
+                  <span className="dark:text-gray-400">Efficiency:</span>
+                  <span className="font-medium text-green-600 dark:text-green-400">{metrics?.currentEfficiency || 0}%</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Generation:</span>
-                  <span className="font-medium text-blue-600">245.8 MWh</span>
+                  <span className="dark:text-gray-400">Generation:</span>
+                  <span className="font-medium text-blue-600 dark:text-blue-400">245.8 MWh</span>
                 </div>
                 <div className="flex justify-between">
-                  <span>Status:</span>
-                  <span className="font-medium text-green-600">Optimal</span>
+                  <span className="dark:text-gray-400">Status:</span>
+                  <span className="font-medium text-green-600 dark:text-green-400">Optimal</span>
                 </div>
               </div>
             </div>
@@ -163,8 +163,8 @@ function App() {
       </div>
       
       {/* Footer */}
-      <footer className="bg-white border-t border-gray-200 py-4 px-6">
-        <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600">
+      <footer className="bg-white border-t border-gray-200 py-4 px-6 dark:bg-gray-800 dark:border-gray-700">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-sm text-gray-600 dark:text-gray-400">
           <div className="flex items-center gap-4">
             <span>© 2025 sol</span>
             <span>•</span>

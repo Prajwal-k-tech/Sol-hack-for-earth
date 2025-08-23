@@ -9,13 +9,17 @@ import {
   BarChart3,
   Map,
   LogOut,
-  HelpCircle
+  HelpCircle,
+  Sun,
+  Moon
 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 const Navbar = ({ notifications = [], onNotificationRead }) => {
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   
   const unreadCount = notifications.filter(n => !n.read).length;
   
@@ -61,7 +65,7 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
   };
 
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
+    <nav className="bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50 dark:bg-gray-800 dark:border-gray-700">
       <div className="max-w-full px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo and Brand */}
@@ -71,8 +75,8 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
                 <Zap className="w-6 h-6 text-white" />
               </div>
               <div className="ml-3 hidden sm:block">
-                <h1 className="text-xl font-bold text-gray-900">sol</h1>
-                <p className="text-xs text-gray-500">Intelligent Solar Operations</p>
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">sol</h1>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Intelligent Solar Operations</p>
               </div>
             </div>
           </div>
@@ -84,8 +88,8 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
                 key={item.name}
                 className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   item.active
-                    ? 'text-sky-700 bg-sky-50 border-b-2 border-sky-500'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    ? 'text-sky-700 bg-sky-50 border-b-2 border-sky-500 dark:text-sky-400 dark:bg-gray-700 dark:border-sky-500'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-700'
                 }`}
               >
                 <item.icon className="w-4 h-4" />
@@ -96,6 +100,14 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
 
           {/* Right side - Notifications, Profile */}
           <div className="flex items-center space-x-4">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-full transition-colors dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
+            >
+              {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+            </button>
+
             {/* Notifications */}
             <div className="relative">
               <button
@@ -112,10 +124,10 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
 
               {/* Notifications Dropdown */}
               {isNotificationOpen && (
-                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                  <div className="px-4 py-3 border-b border-gray-200">
-                    <h3 className="text-sm font-semibold text-gray-900">Notifications</h3>
-                    <p className="text-xs text-gray-500">{unreadCount} unread</p>
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 dark:bg-gray-800 dark:border-gray-700">
+                  <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                    <h3 className="text-sm font-semibold text-gray-900 dark:text-white">Notifications</h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{unreadCount} unread</p>
                   </div>
                   
                   <div className="max-h-80 overflow-y-auto">
@@ -124,8 +136,8 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
                         <div
                           key={notification.id}
                           onClick={() => handleNotificationClick(notification)}
-                          className={`px-4 py-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors ${
-                            !notification.read ? 'bg-blue-50' : ''
+                          className={`px-4 py-3 border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors dark:border-gray-700 dark:hover:bg-gray-700 ${
+                            !notification.read ? 'bg-blue-50 dark:bg-gray-700' : ''
                           }`}
                         >
                           <div className="flex items-start gap-3">
@@ -134,14 +146,14 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
                             </span>
                             <div className="flex-1 min-w-0">
                               <p className={`text-sm font-medium ${
-                                !notification.read ? 'text-gray-900' : 'text-gray-700'
+                                !notification.read ? 'text-gray-900 dark:text-white' : 'text-gray-700 dark:text-gray-300'
                               }`}>
                                 {notification.title}
                               </p>
-                              <p className="text-xs text-gray-600 mt-1">
+                              <p className="text-xs text-gray-600 mt-1 dark:text-gray-400">
                                 {notification.message}
                               </p>
-                              <p className="text-xs text-gray-400 mt-1">
+                              <p className="text-xs text-gray-400 mt-1 dark:text-gray-500">
                                 {formatTimeAgo(notification.timestamp)}
                               </p>
                             </div>
@@ -152,16 +164,16 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
                         </div>
                       ))
                     ) : (
-                      <div className="px-4 py-8 text-center text-gray-500">
-                        <Bell className="w-8 h-8 mx-auto mb-2 text-gray-300" />
+                      <div className="px-4 py-8 text-center text-gray-500 dark:text-gray-400">
+                        <Bell className="w-8 h-8 mx-auto mb-2 text-gray-300 dark:text-gray-600" />
                         <p className="text-sm">No notifications</p>
                       </div>
                     )}
                   </div>
                   
                   {notifications.length > 0 && (
-                    <div className="px-4 py-3 border-t border-gray-200">
-                      <button className="text-xs text-sky-600 hover:text-sky-800 font-medium">
+                    <div className="px-4 py-3 border-t border-gray-200 dark:border-gray-700">
+                      <button className="text-xs text-sky-600 hover:text-sky-800 font-medium dark:text-sky-400 dark:hover:text-sky-300">
                         Mark all as read
                       </button>
                     </div>
@@ -174,41 +186,41 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
             <div className="relative">
               <button
                 onClick={() => setIsProfileOpen(!isProfileOpen)}
-                className="flex items-center gap-2 p-1 rounded-full hover:bg-gray-50 transition-colors"
+                className="flex items-center gap-2 p-1 rounded-full hover:bg-gray-50 transition-colors dark:hover:bg-gray-700"
               >
                 <div className="w-8 h-8 bg-gradient-to-br from-sky-400 to-solar-400 rounded-full flex items-center justify-center">
                   <User className="w-4 h-4 text-white" />
                 </div>
-                <span className="hidden sm:block text-sm font-medium text-gray-700">
+                <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-300">
                   Admin
                 </span>
               </button>
 
               {/* Profile Dropdown Menu */}
               {isProfileOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
-                  <div className="px-4 py-3 border-b border-gray-200">
-                    <p className="text-sm font-medium text-gray-900">Admin User</p>
-                    <p className="text-xs text-gray-500">admin@sol-ai.com</p>
+                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50 dark:bg-gray-800 dark:border-gray-700">
+                  <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">Admin User</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">admin@sol-ai.com</p>
                   </div>
                   
                   <div className="py-1">
-                    <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                    <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700">
                       <User className="w-4 h-4" />
                       Profile
                     </button>
-                    <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                    <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700">
                       <Settings className="w-4 h-4" />
                       Settings
                     </button>
-                    <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">
+                    <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 dark:text-gray-300 dark:hover:bg-gray-700">
                       <HelpCircle className="w-4 h-4" />
                       Help
                     </button>
                   </div>
                   
-                  <div className="border-t border-gray-200 py-1">
-                    <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50">
+                  <div className="border-t border-gray-200 dark:border-gray-700 py-1">
+                    <button className="flex items-center gap-2 w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/50">
                       <LogOut className="w-4 h-4" />
                       Sign out
                     </button>
@@ -220,7 +232,7 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
             {/* Mobile menu button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md"
+              className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700"
             >
               {isMobileMenuOpen ? (
                 <X className="w-5 h-5" />
@@ -233,14 +245,14 @@ const Navbar = ({ notifications = [], onNotificationRead }) => {
 
         {/* Mobile Navigation */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-2">
+          <div className="md:hidden border-t border-gray-200 py-2 dark:border-gray-700">
             {navigationItems.map((item) => (
               <button
                 key={item.name}
                 className={`flex items-center gap-2 w-full px-4 py-2 text-sm font-medium transition-colors ${
                   item.active
-                    ? 'text-sky-700 bg-sky-50'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    ? 'text-sky-700 bg-sky-50 dark:text-sky-400 dark:bg-gray-700'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50 dark:text-gray-300 dark:hover:text-white dark:hover:bg-gray-700'
                 }`}
               >
                 <item.icon className="w-4 h-4" />

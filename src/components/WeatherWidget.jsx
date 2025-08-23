@@ -41,21 +41,21 @@ const WeatherWidget = ({ weatherData }) => {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold text-gray-900">Weather Conditions</h3>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Weather Conditions</h3>
       
       {/* Weather Alert */}
       {alert && (
         <div className={`p-3 rounded-lg border-l-4 ${
           alert.severity === 'high' 
-            ? 'bg-red-50 border-red-400' 
-            : 'bg-yellow-50 border-yellow-400'
+            ? 'bg-red-50 border-red-400 dark:bg-red-900/50 dark:border-red-500' 
+            : 'bg-yellow-50 border-yellow-400 dark:bg-yellow-900/50 dark:border-yellow-500'
         }`}>
           <div className="flex items-center gap-2">
             <AlertCircle className={`w-4 h-4 ${
-              alert.severity === 'high' ? 'text-red-600' : 'text-yellow-600'
+              alert.severity === 'high' ? 'text-red-600 dark:text-red-400' : 'text-yellow-600 dark:text-yellow-400'
             }`} />
             <p className={`text-sm font-medium ${
-              alert.severity === 'high' ? 'text-red-800' : 'text-yellow-800'
+              alert.severity === 'high' ? 'text-red-800 dark:text-red-300' : 'text-yellow-800 dark:text-yellow-300'
             }`}>
               {alert.message}
             </p>
@@ -64,17 +64,17 @@ const WeatherWidget = ({ weatherData }) => {
       )}
 
       {/* Current Weather */}
-      <div className="bg-white border border-gray-200 rounded-lg p-4">
+      <div className="bg-white border border-gray-200 rounded-lg p-4 dark:bg-gray-800 dark:border-gray-700">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
             <WeatherIcon className="w-8 h-8 text-yellow-500" />
             <div>
-              <h4 className="font-semibold text-gray-900">{current.condition}</h4>
-              <p className="text-xs text-gray-500">Current conditions</p>
+              <h4 className="font-semibold text-gray-900 dark:text-white">{current.condition}</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Current conditions</p>
             </div>
           </div>
           <div className="text-right">
-            <p className="text-3xl font-bold text-gray-900">{current.temperature}°C</p>
+            <p className="text-3xl font-bold text-gray-900 dark:text-white">{current.temperature}°C</p>
           </div>
         </div>
 
@@ -82,58 +82,58 @@ const WeatherWidget = ({ weatherData }) => {
           <div className="flex items-center gap-2">
             <Droplets className="w-4 h-4 text-blue-500" />
             <div>
-              <p className="text-xs text-gray-600">Humidity</p>
-              <p className="font-semibold text-gray-900">{current.humidity}%</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Humidity</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{current.humidity}%</p>
             </div>
           </div>
           
           <div className="flex items-center gap-2">
             <Wind className="w-4 h-4 text-gray-500" />
             <div>
-              <p className="text-xs text-gray-600">Wind Speed</p>
-              <p className="font-semibold text-gray-900">{current.windSpeed} km/h</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Wind Speed</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{current.windSpeed} km/h</p>
             </div>
           </div>
           
           <div className="flex items-center gap-2">
             <Sun className="w-4 h-4 text-orange-500" />
             <div>
-              <p className="text-xs text-gray-600">UV Index</p>
-              <p className="font-semibold text-gray-900">{current.uvIndex}</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">UV Index</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{current.uvIndex}</p>
             </div>
           </div>
           
           <div className="flex items-center gap-2">
             <Eye className="w-4 h-4 text-gray-500" />
             <div>
-              <p className="text-xs text-gray-600">Visibility</p>
-              <p className="font-semibold text-gray-900">{current.visibility} km</p>
+              <p className="text-xs text-gray-600 dark:text-gray-400">Visibility</p>
+              <p className="font-semibold text-gray-900 dark:text-white">{current.visibility} km</p>
             </div>
           </div>
         </div>
       </div>
 
       {/* Air Quality */}
-      <div className="bg-white border border-gray-200 rounded-lg p-4">
-        <h4 className="font-semibold text-gray-900 mb-3">Air Quality Impact</h4>
+      <div className="bg-white border border-gray-200 rounded-lg p-4 dark:bg-gray-800 dark:border-gray-700">
+        <h4 className="font-semibold text-gray-900 mb-3 dark:text-white">Air Quality Impact</h4>
         
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm text-gray-600">PM2.5 Level</span>
+            <span className="text-sm text-gray-600 dark:text-gray-400">PM2.5 Level</span>
             <div className="flex items-center gap-2">
-              <span className="font-semibold text-gray-900">{current.pm25} μg/m³</span>
+              <span className="font-semibold text-gray-900 dark:text-white">{current.pm25} μg/m³</span>
               <span className={`px-2 py-1 text-xs font-medium rounded-full ${
-                pm25Status.color === 'green' ? 'bg-green-100 text-green-800' :
-                pm25Status.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
-                pm25Status.color === 'orange' ? 'bg-orange-100 text-orange-800' :
-                'bg-red-100 text-red-800'
+                pm25Status.color === 'green' ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300' :
+                pm25Status.color === 'yellow' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300' :
+                pm25Status.color === 'orange' ? 'bg-orange-100 text-orange-800 dark:bg-orange-900/50 dark:text-orange-300' :
+                'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-300'
               }`}>
                 {pm25Status.status}
               </span>
             </div>
           </div>
           
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-gray-200 rounded-full h-2 dark:bg-gray-700">
             <div 
               className={`h-2 rounded-full ${
                 pm25Status.color === 'green' ? 'bg-green-500' :
@@ -145,15 +145,15 @@ const WeatherWidget = ({ weatherData }) => {
             />
           </div>
           
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-gray-500 dark:text-gray-400">
             High PM2.5 levels increase soiling rate by up to 23%
           </div>
         </div>
       </div>
 
       {/* 3-Day Forecast */}
-      <div className="bg-white border border-gray-200 rounded-lg p-4">
-        <h4 className="font-semibold text-gray-900 mb-3">3-Day Forecast</h4>
+      <div className="bg-white border border-gray-200 rounded-lg p-4 dark:bg-gray-800 dark:border-gray-700">
+        <h4 className="font-semibold text-gray-900 mb-3 dark:text-white">3-Day Forecast</h4>
         
         <div className="space-y-2">
           {(weatherData?.forecast || [
@@ -161,17 +161,17 @@ const WeatherWidget = ({ weatherData }) => {
             { day: 'Tomorrow', temp: 35, condition: 'Dusty', soilingRisk: 'high' },
             { day: 'Day 3', temp: 30, condition: 'Cloudy', soilingRisk: 'medium' }
           ]).map((day, index) => (
-            <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-b-0">
+            <div key={index} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-b-0 dark:border-gray-700">
               <div className="flex items-center gap-3">
-                <WeatherIcon className="w-5 h-5 text-gray-600" />
+                <WeatherIcon className="w-5 h-5 text-gray-600 dark:text-gray-400" />
                 <div>
-                  <p className="text-sm font-medium text-gray-900">{day.day}</p>
-                  <p className="text-xs text-gray-500">{day.condition}</p>
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">{day.day}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400">{day.condition}</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-3">
-                <span className="text-sm font-semibold text-gray-900">{day.temp}°C</span>
+                <span className="text-sm font-semibold text-gray-900 dark:text-white">{day.temp}°C</span>
                 <div className={`w-2 h-2 rounded-full ${
                   day.soilingRisk === 'low' ? 'bg-green-500' :
                   day.soilingRisk === 'medium' ? 'bg-yellow-500' :
