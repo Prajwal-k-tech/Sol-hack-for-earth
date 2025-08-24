@@ -13,6 +13,7 @@ import {
 } from "lucide-react"
 import { OverviewCards } from "@/components/overview-cards"
 import { CleaningForecast } from "@/components/cleaning-forecast"
+import { WeatherEvents } from "@/components/weather-events"
 import { ReportsSection } from "@/components/reports-section"
 import { SystemStatus } from "@/components/system-status"
 import RoiSimulator from "./roi-simulator"
@@ -108,34 +109,38 @@ export function Dashboard() {
           </section>
 
           {/* Main Dashboard Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            {/* Left Column - Reports Section */}
-            <div className="lg:col-span-3 space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {/* Left Column - Reports and Forecast */}
+            <div className="lg:col-span-2 space-y-6">
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold text-text-primary">
                   Performance Analytics
                 </h3>
               </div>
               <ReportsSection />
+              
+              {/* Cleaning Forecast to fill the empty space */}
+              <div className="mt-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-text-primary">
+                    Predictive Maintenance
+                  </h3>
+                </div>
+                <CleaningForecast />
+              </div>
             </div>
 
-            {/* Right Column - Cleaning Intelligence */}
-            <div className="lg:col-span-1 space-y-2">
+            {/* Right Column - Summary Cards */}
+            <div className="lg:col-span-1 space-y-6">
               <div className="flex items-center justify-between">
                 <h3 className="text-xl font-semibold text-text-primary">
-                  Cleaning Intelligence
+                  System Intelligence
                 </h3>
               </div>
-              <div className="space-y-2">
-                <CleaningForecast />
-                <CleaningSummary />
-                
-                {/* Bottom Grid for ROI and System Status */}
-                <div className="grid grid-cols-1 gap-2">
-                  <RoiSimulator />
-                  <SystemStatus />
-                </div>
-              </div>
+              <CleaningSummary />
+              <RoiSimulator />
+              <WeatherEvents />
+              <SystemStatus />
             </div>
           </div>
 
