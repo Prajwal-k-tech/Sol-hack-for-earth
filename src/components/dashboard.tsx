@@ -30,8 +30,8 @@ export function Dashboard() {
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-3">
                 <div className="relative group">
-                  <Sun className="h-8 w-8 text-accent-warning transition-transform duration-300 group-hover:rotate-45 text-amber-200" />
-                  <Sparkles className="h-4 w-4 text-accent-primary absolute -top-1 -right-1 transition-all duration-300 group-hover:scale-125 text-amber-200" />
+                  <Sun className="h-8 w-8 text-accent-warning transition-transform duration-300 group-hover:rotate-45" />
+                  <Sparkles className="h-4 w-4 text-accent-primary absolute -top-1 -right-1 transition-all duration-300 group-hover:scale-125" />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold text-text-primary">sol</h1>
