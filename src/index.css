@@ -1,6 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap');
 @import 'tailwindcss';
 
+@theme {
+  /* Catppuccin Mocha color palette */
+  --color-base-50: #cdd6f4;
+  --color-base-100: #b4befe;
+  --color-base-200: #89b4fa;
+  --color-base-300: #74c7ec;
+  --color-base-400: #89dceb;
+  --color-base-500: #a6e3a1;
+  --color-base-600: #f9e2af;
+  --color-base-700: #fab387;
+  --color-base-800: #f38ba8;
+  --color-base-900: #eba0ac;
+
+  --color-text-primary: #cdd6f4;
+  --color-text-secondary: #bac2de;
+  --color-text-muted: #a6adc8;
+  --color-text-disabled: #6c7086;
+
+  --color-surface-base: #1e1e2e;
+  --color-surface-mantle: #181825;
+  --color-surface-crust: #11111b;
+  --color-surface-overlay: #313244;
+  --color-surface-overlay-1: #45475a;
+  --color-surface-overlay-2: #585b70;
+
+  --color-accent-primary: #cba6f7;
+  --color-accent-secondary: #f5c2e7;
+  --color-accent-success: #a6e3a1;
+  --color-accent-warning: #f9e2af;
+  --color-accent-error: #f38ba8;
+  --color-accent-info: #89b4fa;
+
+  --color-border: #45475a;
+  --color-ring: #cba6f7;
+
+  /* Font families */
+  --font-family-sans: 'Inter', system-ui, sans-serif;
+  --font-family-mono: 'JetBrains Mono', monospace;
+
+  /* Custom shadows */
+  --shadow-glow: 0 0 20px rgb(203 166 247 / 0.3);
+  --shadow-glow-lg: 0 0 40px rgb(203 166 247 / 0.2);
+}
+
 * {
   box-sizing: border-box;
 }

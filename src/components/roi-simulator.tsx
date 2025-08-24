@@ -38,14 +38,14 @@ const RoiSimulator = () => {
   };
 
   return (
-    <Card className="bg-surface-mantle border-border shadow-glow-sm hover:shadow-glow-md transition-all duration-300">
-      <CardHeader className="pb-2">
+    <Card className="hover:shadow-glow transition-all duration-300">
+      <CardHeader className="pb-3">
         <CardTitle className="flex items-center gap-2 text-lg font-semibold text-text-primary">
           <Calculator className="w-5 h-5 text-accent-info" />
           ROI Simulator
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className="space-y-4">
         <div className="space-y-2">
           <div>
             <label htmlFor="cleaning-cost" className="text-sm font-medium text-text-secondary mb-1 block">
@@ -59,11 +59,15 @@ const RoiSimulator = () => {
                 value={cost}
                 onChange={(e) => setCost(e.target.value)}
                 placeholder="e.g., 2500"
-                className="pl-7 text-base"
+                className="pl-7 text-base bg-surface-overlay/50 border-border/60 text-text-primary placeholder:text-text-muted focus:border-accent-primary focus:ring-accent-primary/20"
               />
             </div>
           </div>
-          <Button onClick={handleCalculate} variant="default" className="w-full">
+          <Button 
+            onClick={handleCalculate} 
+            variant="default" 
+            className="w-full bg-accent-primary hover:bg-accent-primary/90 text-surface-base font-medium shadow-md hover:shadow-glow transition-all duration-300"
+          >
             <TrendingUp className="w-4 h-4 mr-2" />
             Calculate ROI
           </Button>
