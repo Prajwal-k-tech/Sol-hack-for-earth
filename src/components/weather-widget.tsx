@@ -36,7 +36,6 @@ export function WeatherWidget({ className }: WeatherWidgetProps) {
   useEffect(() => {
     const interval = setInterval(() => {
       const conditions: WeatherData['condition'][] = ['sunny', 'cloudy', 'rainy', 'windy']
-      const dustLevels: WeatherData['dustLevel'][] = ['low', 'medium', 'high']
       
       // Realistic temperature range for Rajasthan
       const temperature = 28 + Math.random() * 15 // 28-43°C realistic range
