@@ -5,6 +5,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContai
 import { mockDashboardData, type CleaningRecord, formatCurrency, formatDateShort } from "@/lib/mock-data"
 import { cn } from "@/lib/utils"
 import { BarChart3, Calendar, Download, IndianRupee, TrendingUp, Zap } from "lucide-react";
+import { exportData } from "./notification-system"
 
 const getCleaningTypeBadge = (type: CleaningRecord['type']) => {
   switch (type) {
@@ -48,6 +49,14 @@ export function ReportsSection() {
     sum + ((item.predicted - item.actual) / item.predicted * 100), 0
   ) / data.energyData.length
 
+  const handleExportEnergyData = () => {
+    exportData('energy')
+  }
+
+  const handleExportCleaningData = () => {
+    exportData('cleaning')
+  }
+
   return (
     <div className="space-y-6">
       {/* Energy Performance Chart */}
@@ -61,7 +70,7 @@ export function ReportsSection() {
               </CardTitle>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" onClick={handleExportEnergyData}>
                 <Download className="h-4 w-4 mr-2" />
                 Export
               </Button>
@@ -147,7 +156,7 @@ export function ReportsSection() {
               <Calendar className="h-5 w-5 text-accent-info" />
               Cleaning History
             </CardTitle>
-            <Button variant="outline" size="sm">
+            <Button variant="outline" size="sm" onClick={handleExportCleaningData}>
               View All Records
             </Button>
           </div>

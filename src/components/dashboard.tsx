@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -9,7 +10,8 @@ import {
   RefreshCw, 
   Menu,
   ChevronDown,
-  Sparkles
+  Sparkles,
+  Download
 } from "lucide-react"
 import { OverviewCards } from "@/components/overview-cards"
 import { CleaningForecast } from "@/components/cleaning-forecast"
@@ -18,166 +20,210 @@ import { ReportsSection } from "@/components/reports-section"
 import { SystemStatus } from "@/components/system-status"
 import RoiSimulator from "./roi-simulator"
 import CleaningSummary from "./cleaning-summary"
+import { InteractiveScheduler } from "./interactive-scheduler"
+import { NotificationCenter, useNotifications, exportData } from "./notification-system"
+import { LivePowerMeter } from "./live-power-meter"
+import { WeatherWidget } from "./weather-widget"
+import { EquipmentHealth } from "./equipment-health"
+import { PerformanceAnalytics } from "./performance-analytics"
 
-export function Dashboard() {
+export default function Dashboard() {
+  const { notifications, unreadCount, addNotification, markAsRead, markAllAsRead } = useNotifications()
+  const [showNotifications, setShowNotifications] = useState(false)
+  const [showScheduler, setShowScheduler] = useState(false)
+
+  const handleExportData = () => {
+    exportData('full')
+    addNotification({
+      type: 'info',
+      title: 'Data export started successfully',
+      message: 'Your data is being prepared for download.'
+    })
+  }
+
+  const handleRefreshData = () => {
+    addNotification({
+      type: 'success',
+      title: 'Data refreshed',
+      message: 'All sensors and forecasts have been updated.'
+    })
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-surface-base via-surface-mantle to-surface-crust">
-      {/* Header */}
-      <header className="sticky top-0 z-50 border-b border-border bg-surface-base/80 backdrop-blur-lg">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo and Title */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-3">
-                <div className="relative group">
-                  <Sun className="h-8 w-8 text-accent-warning transition-transform duration-300 group-hover:rotate-45" />
-                  <Sparkles className="h-4 w-4 text-accent-primary absolute -top-1 -right-1 transition-all duration-300 group-hover:scale-125" />
+    <div className="min-h-screen bg-crust">
+      {/* Navigation Header */}
+      <nav className="bg-surface-overlay border-b border-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center">
+              <div className="flex-shrink-0 flex items-center">
+                <Sun className="h-8 w-8 text-accent-warning" />
+                <div className="ml-3">
+                  <span className="text-xl font-bold text-text-primary">Sol</span>
+                  <div className="text-sm text-text-muted font-normal">Solar Analytics Platform</div>
                 </div>
-                <div>
-                  <h1 className="text-2xl font-bold text-text-primary">sol</h1>
-                  <p className="text-sm text-text-muted">Solar Analytics Platform</p>
-                </div>
+              </div>
+              <div className="hidden md:ml-6 md:flex md:space-x-8">
+                <a href="#" className="text-accent-info hover:text-accent-info/80 border-b-2 border-accent-info px-1 pt-1 pb-4 text-sm font-medium">
+                  Dashboard
+                </a>
+                <a href="#" className="text-text-muted hover:text-text-primary px-1 pt-1 pb-4 text-sm font-medium">
+                  Analytics
+                </a>
+                <a href="#" className="text-text-muted hover:text-text-primary px-1 pt-1 pb-4 text-sm font-medium">
+                  Settings
+                </a>
               </div>
             </div>
-
-            {/* Navigation and Actions */}
-            <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-3">
-                <Badge variant="success" className="animate-pulse ">
-                  ● Live
-                </Badge>
-                <span className="text-sm text-text-muted">Last updated: 2 min ago</span>
-              </div>
+            
+            <div className="flex items-center space-x-4">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleRefreshData}
+                className="border-border hover:bg-surface-overlay"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Refresh
+              </Button>
               
-              <div className="flex items-center gap-2">
-                <Button variant="ghost" size="icon" className="relative">
-                  <Bell className="h-5 w-5" />
-                  <div className="absolute -top-1 -right-1 h-3 w-3 bg-accent-error rounded-full animate-pulse"></div>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={handleExportData}
+                className="border-border hover:bg-surface-overlay"
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Export
+              </Button>
+
+              <div className="relative">
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={() => setShowNotifications(!showNotifications)}
+                  className="border-border hover:bg-surface-overlay relative"
+                >
+                  <Bell className="h-4 w-4" />
+                  {unreadCount > 0 && (
+                    <Badge className="absolute -top-2 -right-2 h-5 w-5 p-0 text-xs bg-accent-primary text-surface-base flex items-center justify-center rounded-full">
+                      {unreadCount}
+                    </Badge>
+                  )}
                 </Button>
                 
-                <Button variant="ghost" size="icon">
-                  <RefreshCw className="h-5 w-5" />
-                </Button>
-                
-                <Button variant="ghost" size="icon">
-                  <Settings className="h-5 w-5" />
-                </Button>
-                
-                <Button variant="ghost" size="icon" className="md:hidden">
-                  <Menu className="h-5 w-5" />
-                </Button>
-                
-                <div className="hidden md:flex items-center gap-2 ml-4 pl-4 border-l border-border">
-                  <div className="w-8 h-8 bg-gradient-to-br from-accent-primary to-accent-secondary rounded-full flex items-center justify-center">
-                    <User className="h-4 w-4 text-surface-base" />
+                {showNotifications && (
+                  <div className="absolute right-0 mt-2 w-80 z-50">
+                    <NotificationCenter
+                      isOpen={showNotifications}
+                      notifications={notifications}
+                      onMarkAsRead={markAsRead}
+                      onMarkAllAsRead={markAllAsRead}
+                      onClose={() => setShowNotifications(false)}
+                    />
                   </div>
-                  <div className="flex items-center gap-1">
-                    <span className="text-sm font-medium text-text-primary">Admin</span>
-                    <ChevronDown className="h-4 w-4 text-text-muted" />
-                  </div>
-                </div>
+                )}
               </div>
+
+              <Button variant="outline" size="sm" className="border-border hover:bg-surface-overlay">
+                <Settings className="h-4 w-4" />
+              </Button>
+              
+              <Button variant="outline" size="sm" className="border-border hover:bg-surface-overlay">
+                <User className="h-4 w-4" />
+              </Button>
+              
+              <Button variant="outline" size="sm" className="md:hidden border-border hover:bg-surface-overlay">
+                <Menu className="h-4 w-4" />
+              </Button>
             </div>
           </div>
         </div>
-      </header>
+      </nav>
 
-      {/* Main Content */}
-      <main className="container mx-auto px-6 py-6">
-        <div className="space-y-6">
-          {/* Welcome Section */}
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold text-text-primary">
-              Good afternoon
-            </h2>
-            <p className="text-text-muted">
-              Here's your solar system performance overview for today.
-            </p>
-          </div>
-
-          {/* Overview Cards */}
-          <section className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-xl font-semibold text-text-primary">
-                System Overview
-              </h3>
-              <Button variant="outline" size="sm">
-                View Details
-              </Button>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold text-text-primary">Solar Analytics Dashboard</h1>
+              <p className="text-text-secondary mt-1">Optimize your panel cleaning schedule</p>
             </div>
-            <OverviewCards />
-          </section>
-
-          {/* Main Dashboard Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left Column - Reports and Forecast */}
-            <div className="lg:col-span-2 space-y-6">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold text-text-primary">
-                  Performance Analytics
-                </h3>
-              </div>
-              <ReportsSection />
-              
-              {/* Cleaning Forecast to fill the empty space */}
-              <div className="mt-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold text-text-primary">
-                    Predictive Maintenance
-                  </h3>
-                </div>
-                <CleaningForecast />
-              </div>
-            </div>
-
-            {/* Right Column - Summary Cards */}
-            <div className="lg:col-span-1 space-y-6">
-              <div className="flex items-center justify-between">
-                <h3 className="text-xl font-semibold text-text-primary">
-                  System Intelligence
-                </h3>
-              </div>
-              <CleaningSummary />
-              <RoiSimulator />
-              <WeatherEvents />
-              <SystemStatus />
+            <div className="flex items-center space-x-2">
+              <Badge className="bg-accent-success text-surface-base">
+                <div className="w-2 h-2 bg-surface-base rounded-full mr-2"></div>
+                All Systems Online
+              </Badge>
+              <Badge className="bg-accent-info text-surface-base">
+                <Sparkles className="w-3 h-3 mr-1" />
+                AI Powered
+              </Badge>
             </div>
           </div>
+        </div>
 
-          {/* Call to Action */}
-          <Card className="border-accent-primary/20 bg-gradient-to-r from-accent-primary/5 to-accent-secondary/5">
-            <CardContent className="p-4">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+        {/* Overview Cards */}
+        <OverviewCards />
+
+        {/* Real-time Monitoring Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+          <div className="space-y-6">
+            <LivePowerMeter />
+            <WeatherWidget />
+          </div>
+          <EquipmentHealth />
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+          {/* Left Column */}
+          <div className="lg:col-span-2 space-y-6">
+            <CleaningForecast />
+            <WeatherEvents />
+            <ReportsSection />
+          </div>
+
+          {/* Right Column */}
+          <div className="space-y-6">
+            <SystemStatus />
+            <RoiSimulator />
+            <CleaningSummary />
+          </div>
+        </div>
+
+        {/* Performance Analytics Section - Compact */}
+        <div className="mt-6">
+          <PerformanceAnalytics />
+        </div>
+
+        {/* Interactive Features Section */}
+        <div className="mt-8 space-y-6">
+          {/* Scheduler Toggle */}
+          <Card className="bg-surface-overlay border-border">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h4 className="text-lg font-semibold text-text-primary mb-2">
-                    Need help optimizing your cleaning schedule?
-                  </h4>
-                  <p className="text-text-muted">
-                    Our AI-powered recommendations can help you save up to 15% on maintenance costs.
-                  </p>
+                  <h3 className="text-lg font-semibold text-text-primary">Cleaning Schedule</h3>
+                  <p className="text-text-secondary text-sm">Manage your cleaning calendar and optimize schedules</p>
                 </div>
-                <div className="flex gap-3">
-                  <Button variant="outline" className="hover:border-accent-info/50 hover:text-accent-info">
-                    Learn More
-                  </Button>
-                  <Button className="shadow-lg hover:shadow-glow bg-gradient-to-r from-accent-primary to-accent-secondary">
-                    Get Recommendations
-                  </Button>
-                </div>
+                <Button 
+                  onClick={() => setShowScheduler(!showScheduler)}
+                  className="bg-accent-info hover:bg-accent-info/80 text-surface-base"
+                >
+                  {showScheduler ? 'Hide' : 'Show'} Calendar
+                  <ChevronDown className={`ml-2 h-4 w-4 transition-transform ${showScheduler ? 'rotate-180' : ''}`} />
+                </Button>
               </div>
+              
+              {showScheduler && (
+                <div className="mt-4 border-t border-border pt-4">
+                  <InteractiveScheduler />
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
-      </main>
-
-      {/* Footer */}
-      <footer className="border-t border-border bg-surface-mantle/50 backdrop-blur-sm mt-8">
-        <div className="container mx-auto px-6 py-4 text-center">
-          <p className="text-sm text-text-muted">
-            © 2025 sol. All rights reserved.
-          </p>
-        </div>
-      </footer>
+      </div>
     </div>
   )
 }

@@ -1,4 +1,8 @@
 import { format, addDays, subDays } from 'date-fns'
+import { 
+  generateRealisticEnergyData, 
+  defaultSystemProfile 
+} from './solar-calculations'
 
 export interface EnergyData {
   date: string
@@ -33,23 +37,15 @@ export interface DashboardData {
   upcomingEvents: WeatherEvent[]
 }
 
-// Generate mock energy data for the last 30 days
+// Generate mock energy data for the last 30 days using realistic calculations
 const generateEnergyData = (): EnergyData[] => {
-  const data: EnergyData[] = []
+  const realisticData = generateRealisticEnergyData(defaultSystemProfile, 30)
   
-  for (let i = 29; i >= 0; i--) {
-    const date = format(subDays(new Date(), i), 'yyyy-MM-dd')
-    const baseProduction = 450 + Math.random() * 100 // Base 450-550 kWh
-    const soilingFactor = 1 - (0.05 + Math.random() * 0.1) // 5-15% loss
-    
-    data.push({
-      date,
-      predicted: Math.round(baseProduction),
-      actual: Math.round(baseProduction * soilingFactor)
-    })
-  }
-  
-  return data
+  return realisticData.map(item => ({
+    date: item.date,
+    predicted: item.predicted,
+    actual: item.actual
+  }))
 }
 
 // Generate mock cleaning history
@@ -128,11 +124,11 @@ const generateUpcomingEvents = (): WeatherEvent[] => {
 }
 
 export const mockDashboardData: DashboardData = {
-  currentProduction: 487.3,
-  estimatedSoilingLoss: 8.7,
-  economicThreshold: 1250,
-  optimalCleaningDate: format(addDays(new Date(), 5), 'yyyy-MM-dd'),
-  lastCleaning: format(subDays(new Date(), 7), 'yyyy-MM-dd'),
+  currentProduction: defaultSystemProfile.capacity * 4.8, // Realistic daily generation based on irradiance
+  estimatedSoilingLoss: 12.3, // Based on 14 days since last cleaning
+  economicThreshold: 2500, // Cost threshold for cleaning intervention
+  optimalCleaningDate: format(addDays(new Date(), 3), 'yyyy-MM-dd'), // Calculated optimal date
+  lastCleaning: format(subDays(new Date(), 14), 'yyyy-MM-dd'), // 14 days ago
   energyData: generateEnergyData(),
   cleaningHistory: generateCleaningHistory(),
   upcomingEvents: generateUpcomingEvents()
